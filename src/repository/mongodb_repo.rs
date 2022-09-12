@@ -1,6 +1,7 @@
 use std::env;
 extern crate dotenv;
 use dotenv::dotenv;
+use mongodb::bson::Bson;
 
 use crate::models::teacher_model::Class;
 use crate::models::teacher_model::Student;
@@ -165,12 +166,19 @@ impl MongoRepo {
             .ok()
             .expect("Error getting student's detail");
 
-        let tch = student_detail.unwrap();
+        let mut tch = student_detail.unwrap();
+
+        let mut notas = Vec::new();
+
+        let mut st = Student {
+            id: *id,
+            notas: Vec::new(),
+        };
 
         // let mut student = tch.materias[0].estudiantes[0];
-        for m in tch.materias {
+        for mut m in tch.materias {
             if m.materia == *class_name {
-                for s in m.estudiantes {
+                for mut s in m.estudiantes {
                     if s.id == *id {
                         if idx < s.notas.len(){
                             s.notas[idx] = grade;
@@ -178,24 +186,30 @@ impl MongoRepo {
                         else {
                             s.notas.push(grade);
                         }
+                        notas = s.notas;
+                        st.notas = notas;
                     }
                 }
             }
         }
 
-    //     let new_doc = doc! {
-    //         "$set":
-    //             {
-    //                 "id": teacher_id,
-    //                 "materias": tch,
+        // let new_subject = tch.materias;
 
-    //             },
-    //     };
-    //     let updated_doc = self
-    //         .col
-    //         .update_one(filter, new_doc, None)
-    //         .ok()
-    //         .expect("Error updating teacher");
-    //     Ok(updated_doc)
-    // }
+        let new_doc = doc! {
+            "$set":
+                {
+                    "id": teacher_id,
+                    // "materias": <Bson as From<Vec<Class>>>::from(new_subject),
+
+                },
+        };
+        let a_filter = doc! {"id": teacher_id};
+
+        let updated_doc = self
+            .col
+            .update_one(a_filter, new_doc, None)
+            .ok()
+            .expect("Error updating teacher");
+        Ok(updated_doc)
+    }
 }
