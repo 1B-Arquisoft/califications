@@ -10,10 +10,7 @@ COPY . .
 # RUN cargo --config net.git-fetch-with-cli=true fetch
 
 
-RUN cargo run
-
-
-# CMD [ "/target/debug/./califications" ]
+CMD ["cargo","run"]
 
 
 
