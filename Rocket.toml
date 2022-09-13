@@ -1,31 +1,23 @@
-# [development]
-# address = "localhost"
-# port = 8002
-# # workers = [number_of_cpus * 2]
-# log = "normal"
-# # secret_key = [randomly generated at launch]
-# limits = { forms = 32768 }
+## defaults for _all_ profiles
+[default]
+address = "0.0.0.0"
+# limits = { form = "64 kB", json = "1 MiB" }
 
-# [staging]
-# address = "localhost" #"0.0.0.0"
-# port = 8002
-# # workers = [number_of_cpus * 2]
-# log = "normal"
-# # secret_key = [randomly generated at launch]
-# limits = { forms = 32768 }
+## set only when compiled in debug mode, i.e, `cargo build`
+[debug]
+port = 8000
+## only the `json` key from `default` will be overridden; `form` will remain
+# limits = { json = "10MiB" }
 
-# [production]
-# address = "localhost" # "0.0.0.0"
-# port = 8002
-# # workers = [number_of_cpus * 2]
-# log = "critical"
-# # secret_key = [randomly generated at launch]
-# limits = { forms = 32768 }
+## set only when the `nyc` profile is selected
+[nyc]
+port = 9001
 
-# [debug]
-# address = "localhost"
-# port = 8003
-# # workers = [number_of_cpus * 2]
-# log = "normal"
-# # secret_key = [randomly generated at launch]
-# limits = { forms = 32768 }
+## set only when compiled in release mode, i.e, `cargo build --release`
+## don't use this secret_key! generate your own and keep it private!
+[release]
+port = 9999
+# secret_key = "hPRYyVRiMyxpw5sBB1XeCMN1kFsDCqKvBi2QJxBVHQk="
+
+[build]
+port = 8000

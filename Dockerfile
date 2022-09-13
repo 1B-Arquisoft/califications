@@ -7,10 +7,11 @@ COPY . .
 
 # RUN cargo install --path .
 
-# RUN cargo --config net.git-fetch-with-cli=true fetch
+RUN cargo build
 
 
-CMD ["cargo","run"]
+# CMD [ "califications"]
+CMD [ "cargo", "run" ]
 
 
 
