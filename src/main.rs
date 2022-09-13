@@ -5,7 +5,7 @@ mod repository;
 #[macro_use]
 extern crate rocket;
 
-use api::teacher_api::{create_teacher, get_teacher, update_teacher, delete_teacher, get_teacher_by_id, get_student}; //import the handler here
+use api::teacher_api::{create_teacher, get_teacher, update_teacher, delete_teacher, get_teacher_by_id, get_student, hello}; //import the handler here
 use repository::mongodb_repo::MongoRepo;
 
 #[launch]
@@ -19,4 +19,5 @@ fn rocket() -> _ {
         .mount("/", routes![delete_teacher])
         .mount("/", routes![get_teacher_by_id])
         .mount("/", routes![get_student])
+        .mount("/", routes![hello])
 }

@@ -1,11 +1,17 @@
-use std::vec;
+use std::{vec, fmt::format};
 
 use crate::{
     models::teacher_model::{Class, Student, Teacher},
     repository::mongodb_repo::MongoRepo,
 };
 use mongodb::results::InsertOneResult;
-use rocket::{http::Status, serde::json::Json, State};
+use rocket::{http::Status, serde::json::Json, State, futures::future::ok};
+
+#[get("/")]
+pub fn hello(){
+    println!("Hello, world!");
+    format!("Hello, world!");
+}
 
 #[post("/teacher", data = "<new_teacher>")]
 pub fn create_teacher(

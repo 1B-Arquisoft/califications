@@ -26,3 +26,7 @@ serde = "1.0.136"
 version = "2.2.0"
 default-features = false
 features = ["sync"] 
+
+[net]
+
+git-fetch-with-cli = true
