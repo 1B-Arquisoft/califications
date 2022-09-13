@@ -1,13 +1,13 @@
 FROM rustlang/rust:nightly
 
-# WORKDIR .
+WORKDIR /usr/src/califications
 
-# COPY calificationsms .
+COPY . .
 
 RUN cargo install --path .
 
 
-CMD [ ".califications"]
+CMD [ "califications"]
 
 
 
