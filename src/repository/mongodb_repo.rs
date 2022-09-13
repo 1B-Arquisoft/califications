@@ -22,7 +22,7 @@ pub struct MongoRepo {
 
 impl MongoRepo {
     pub fn init() -> Self {
-        dotenv().ok();
+        // dotenv().ok();
         // Load the MongoDB connection string from an environment variable:
         let client_uri =  "mongodb+srv://ArquiSoft:ArquiSoft@cluster0.3gasdka.mongodb.net/?retryWrites=true&w=majority";
         // env::var("MONGODB_URI").expect("You must set the MONGODB_URI environment var!");
