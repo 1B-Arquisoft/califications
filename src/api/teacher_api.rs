@@ -81,9 +81,9 @@ pub fn update_teacher(
         id: new_teacher.id,
         notas: {
             let mut notas = Vec::new();
-            notas.push(1);
-            notas.push(2);
-            notas.push(3);
+            notas.push(0);
+            notas.push(0);
+            notas.push(0);
             notas
         },
     };
@@ -148,3 +148,5 @@ pub fn get_student(
         Err(_) => Err(Status::InternalServerError),
     }
 }
+
+// #[put ]

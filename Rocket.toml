@@ -1,0 +1,31 @@
+# [development]
+# address = "localhost"
+# port = 8002
+# # workers = [number_of_cpus * 2]
+# log = "normal"
+# # secret_key = [randomly generated at launch]
+# limits = { forms = 32768 }
+
+# [staging]
+# address = "localhost" #"0.0.0.0"
+# port = 8002
+# # workers = [number_of_cpus * 2]
+# log = "normal"
+# # secret_key = [randomly generated at launch]
+# limits = { forms = 32768 }
+
+# [production]
+# address = "localhost" # "0.0.0.0"
+# port = 8002
+# # workers = [number_of_cpus * 2]
+# log = "critical"
+# # secret_key = [randomly generated at launch]
+# limits = { forms = 32768 }
+
+# [debug]
+# address = "localhost"
+# port = 8003
+# # workers = [number_of_cpus * 2]
+# log = "normal"
+# # secret_key = [randomly generated at launch]
+# limits = { forms = 32768 }

@@ -158,53 +158,78 @@ impl MongoRepo {
 
         let filter = doc! {
             "id": teacher_id,
+            "$and": [
+                {"materias.materia": class_name},
+                {"$and": [
+                    {"materias.estudiantes.id": id},
+                    
+                ]}
+            ]
         };
-
+        
         let student_detail = self
-            .col
-            .find_one(filter, None)
-            .ok()
+        .col
+        .find_one(filter, None)
+        .ok()
             .expect("Error getting student's detail");
-
-        let mut tch = student_detail.unwrap();
-
-        let mut notas = Vec::new();
-
+            
+            let mut new_student = student_detail.unwrap();
+            
+            
+            // let mut tch = student_detail.unwrap();
+            
+            // let mut notas = Vec::new();
+            
         let mut st = Student {
             id: *id,
             notas: Vec::new(),
         };
 
         // let mut student = tch.materias[0].estudiantes[0];
-        for mut m in tch.materias {
-            if m.materia == *class_name {
-                for mut s in m.estudiantes {
-                    if s.id == *id {
-                        if idx < s.notas.len(){
-                            s.notas[idx] = grade;
-                        }
-                        else {
-                            s.notas.push(grade);
-                        }
-                        notas = s.notas;
-                        st.notas = notas;
-                    }
-                }
-            }
-        }
+        // let mut changed_m = false;
+        // for mut m in new_student.materias {
+        //     if m.materia == *class_name {
+        //         for mut s in m.estudiantes {
+        //             if s.id == *id {
+        //                 if idx < s.notas.len(){
+        //                     s.notas[idx] = grade;
+        //                 }
+        //                 else {
+        //                     s.notas.push(grade);
+        //                 }
+        //                 notas = s.notas;
+        //                 st.notas = notas;
+        //                 changed_m  = true;
+        //             }
+        //         }
+        //         if changed_m{
+        //             m.materia 
+        //         }
+        //     }
+        // }
 
-        // let new_subject = tch.materias;
-
+        // // let new_subject = tch.materias;
+        
         let new_doc = doc! {
             "$set":
-                {
-                    "id": teacher_id,
-                    // "materias": <Bson as From<Vec<Class>>>::from(new_subject),
-
-                },
+            {
+                "id": teacher_id,
+                // "materias": <Bson as From<Vec<Class>>>::from(new_subject),
+                
+            },
         };
-        let a_filter = doc! {"id": teacher_id};
-
+        
+        let a_filter = doc! {
+            "id": teacher_id,
+            "$and": [
+                {"materias.materia": class_name},
+                {"$and": [
+                    {"materias.estudiantes.id": id},
+                    
+                ]}
+            ]
+        };
+        
         let updated_doc = self
             .col
             .update_one(a_filter, new_doc, None)
