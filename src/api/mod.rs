@@ -1,1 +1,1 @@
-pub mod teacher_api;
+pub mod rest;

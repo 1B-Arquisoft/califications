@@ -1,18 +1,27 @@
 FROM rustlang/rust:nightly-slim
 
+# FROM rust
+
 WORKDIR /usr/src/califications
 
 COPY . .
-# RUN curl github.com
-
-# RUN cargo install --path .
-
-# RUN cargo build
 
 EXPOSE 8000
 
-# CMD [ "califications"]
-CMD [ "cargo", "run" ]
+# COPY .cargo ~/.cargo
+
+# RUN cargo install --path .
+
+RUN curl http://google.com
+
+RUN cargo build -r
+# RUN HTTP_PROXY=http://ntlm-proxy.org.com:8080
+# RUN HTTPS_PROXY=http://ntlm-proxy.org.com:8080
+# RUN PROXY_USER=NT_DOMAIN\username
+# RUN PROXY_PASS=the_password
 
 
 
+CMD ["./target/debug/./califications"]
+
+# CMD ["cargo", "run"]

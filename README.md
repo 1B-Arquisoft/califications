@@ -1,15 +1,7 @@
-# README TO WORK ON DOCKER
+# README
 
-## Build the image
+This is an implementation of API REST of the application SIUU.
 
-```bash
-docker build -t califications .
-```
+Remember to put into the root directory the files .env and Rocket.toml. Those file are not uploaded because may contain sensitive information.
 
-## Run the container
-
-```bash
-docker run -p 9005:8000 califications
-```
-
-REMEMBER: Rocket sets directions to 0.0.0.0:8000 as default
+In order to build it faster, itś being runned on a docker container using rust. To fully optimized the build, you must change the dockerfile to compile the application in release mode, and changing the command to run the application in release mode.

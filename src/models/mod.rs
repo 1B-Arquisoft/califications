@@ -1,1 +1,1 @@
-pub mod teacher_model;
+pub mod courses;

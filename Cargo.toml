@@ -3,28 +3,25 @@ name = "califications"
 version = "0.1.0"
 edition = "2021"
 
-# [net]
-# git-fetch-with-cli = true
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 # [dependencies]
-# futures = "0.3"
-# rocket = "0.4.10"
-# mongodb = "2.2"
+# rocket = { version = "0.5.0-rc.2", features = ["secrets", "tls", "json"] }
+# dotenv = "0.15.0"
+# # mongo dependencies
+# mongodb = {version = "2.1", features = ["sync"]}
 # bson = { version = "2", features = ["chrono-0_4"] } # Needed for using chrono datetime in doc
-# tokio = "1"
+# # tokio = "1"
 # chrono = "0.4" # Used for setting DateTimes
 # serde = "1" # Used in the Map Data into Structs section
-# dotenv = "0.15.0" # Used for loading environment variables
 
-# //other code section goes here
 
 [dependencies]
-rocket = {version = "0.5.0-rc.2", features = ["json"]}
-serde = "1.0.136"
-# dotenv = "0.15.0"
+rocket = { version = "0.5.0-rc.2", features = ["secrets", "tls", "json"]}
+serde = "1"
+dotenv = "0.15.0"
 
 [dependencies.mongodb]
 version = "2.2.0"
 default-features = false
-features = ["sync"] 
+features = ["sync"]
