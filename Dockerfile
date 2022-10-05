@@ -12,7 +12,7 @@ EXPOSE 8000
 
 # RUN cargo install --path .
 
-RUN curl http://google.com
+# RUN curl http://google.com
 
 RUN cargo build -r
 # RUN HTTP_PROXY=http://ntlm-proxy.org.com:8080
@@ -22,6 +22,6 @@ RUN cargo build -r
 
 
 
-CMD ["./target/debug/./califications"]
+CMD ["./target/release/./califications"]
 
 # CMD ["cargo", "run"]
