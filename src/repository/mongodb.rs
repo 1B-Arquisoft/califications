@@ -57,7 +57,6 @@ impl MongoRepo {
 
     pub fn insert_new_student(
         &self,
-        course_name: String,
         group: String,
         student_id: String,
     ) -> Result<UpdateResult, Error> {
@@ -65,7 +64,6 @@ impl MongoRepo {
             .courses_collection
             .update_one(
                 doc! {
-                    "course_name": course_name,
                     "group": group
                 },
                 doc! {
@@ -86,7 +84,6 @@ impl MongoRepo {
 
     pub fn change_grade_of_student(
         &self,
-        course_name: String,
         group: String,
         student_id: String,
         new_grade: String,
@@ -95,7 +92,6 @@ impl MongoRepo {
             .courses_collection
             .update_one(
                 doc! {
-                    "course_name": course_name,
                     "group": group,
                     "students_in_course.student_id": student_id
                 },
@@ -114,7 +110,6 @@ impl MongoRepo {
 
     pub fn delete_student_on_group(
         &self,
-        course_name: String,
         group: String,
         student_id: String,
     ) -> Result<UpdateResult, Error> {
@@ -122,7 +117,6 @@ impl MongoRepo {
             .courses_collection
             .update_one(
                 doc! {
-                    "course_name": course_name,
                     "group": group
                 },
                 doc! {

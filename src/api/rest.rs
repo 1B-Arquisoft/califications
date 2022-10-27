@@ -21,14 +21,13 @@ pub fn create_course(
     }
 }
 
-#[put("/insert_new_student/<course_name>/<group>/<student_id>")]
+#[put("/insert_new_student/<group>/<student_id>")]
 pub fn insert_new_student(
     db: &State<MongoRepo>,
-    course_name: String,
     group: String,
     student_id: String,
 ) -> Result<String, Status> {
-    let course_response = db.insert_new_student(course_name, group, student_id);
+    let course_response = db.insert_new_student(group, student_id);
     match course_response {
         Ok(_course_response) => Ok("Student was inserted".to_string()),
         Err(_) => Err(Status::InternalServerError),
@@ -36,29 +35,27 @@ pub fn insert_new_student(
 }
 
 
-#[put("/change_grade_of_student/<course_name>/<group>/<student_id>/<new_grade>")]
+#[put("/change_grade_of_student/<group>/<student_id>/<new_grade>")]
 pub fn change_grade_of_student(
     db: &State<MongoRepo>,
-    course_name: String,
     group: String,
     student_id: String,
     new_grade: String,
 ) -> Result<String, Status> {
-    let course_response = db.change_grade_of_student(course_name, group, student_id, new_grade);
+    let course_response = db.change_grade_of_student(group, student_id, new_grade);
     match course_response {
         Ok(_course_response) => Ok("Grade was changed".to_string()),
         Err(_) => Err(Status::InternalServerError),
     }
 }
 
-#[put("/delete_student_on_group/<course_name>/<group>/<student_id>")]
+#[put("/delete_student_on_group/<group>/<student_id>")]
 pub fn delete_student_on_group(
     db: &State<MongoRepo>,
-    course_name: String,
     group: String,
     student_id: String,
 ) -> Result<String, Status> {
-    let course_response = db.delete_student_on_group(course_name, group, student_id);
+    let course_response = db.delete_student_on_group(group, student_id);
     match course_response {
         Ok(_course_response) => Ok("Student was deleted".to_string()),
         Err(_) => Err(Status::InternalServerError),
